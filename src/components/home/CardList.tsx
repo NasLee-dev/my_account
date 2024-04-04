@@ -52,7 +52,7 @@ function CardList() {
             weak={true}
             size="medium"
             onClick={() => {
-              navigate.push('/card/CardListPage')
+              navigate.push('/card')
             }}
           >
             더보기

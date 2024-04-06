@@ -5,6 +5,7 @@ import { BannerSkeleton } from '@components/home/EventBanners'
 import { CreditScoreSkeleton } from '@components/home/CreditScore'
 import Spacing from '@/components/shared/Spacing'
 import { CardListSkeleton } from '@components/home/CardList'
+import { useSession } from 'next-auth/react'
 
 const EventBanners = dynamic(() => import('@components/home/EventBanners'), {
   ssr: false,
@@ -22,6 +23,8 @@ const CardList = dynamic(() => import('@components/home/CardList'), {
 })
 
 export default function Home() {
+  const { data } = useSession()
+  console.log(data)
   return (
     <>
       <EventBanners />

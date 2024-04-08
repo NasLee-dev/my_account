@@ -36,7 +36,7 @@ function Navbar() {
   }, [session, showSignButton])
   return (
     <Flex justify="space-between" align="center" css={navbarStyles}>
-      <Link href="/"></Link>
+      <Link href="/">My Account</Link>
       {rederButton()}
     </Flex>
   )

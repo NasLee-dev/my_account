@@ -4,7 +4,7 @@ import Button from '../shared/Button'
 import ListRow from '../shared/ListRow'
 import Skeleton from '../shared/Skeleton'
 import Text from '../shared/Text'
-import withSusepnse from '../shared/hocs/withSuspense'
+import withSusepnse from '../../hooks/withSuspense'
 import useCards from './hooks/useCard'
 
 function CardList() {

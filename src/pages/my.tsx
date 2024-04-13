@@ -1,7 +1,7 @@
 import Button from '@/components/shared/Button'
 import Flex from '@/components/shared/Flex'
 import Spacing from '@/components/shared/Spacing'
-import withAuth from '@/components/shared/hocs/withAuth'
+import withAuth from '@/hooks/withAuth'
 import { signOut } from 'next-auth/react'
 
 function MyPage() {

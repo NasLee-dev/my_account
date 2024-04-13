@@ -33,8 +33,8 @@ function Account() {
   const 계좌개설상태 = 'READY'
   const title =
     계좌개설상태 === 'READY'
-      ? '만들고 있으신\n 계좌가 있으시군요'
-      : '계좌 개설이\n 더 쉽고 빨라졌어요'
+      ? '만들고 있으신\n계좌가 있으시군요'
+      : '계좌 개설이\n더 쉽고 빨라졌어요'
   const buttonLabel =
     계좌개설상태 === 'READY' ? '이어서 만들기' : '3분만에 개설하기'
   return (

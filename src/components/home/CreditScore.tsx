@@ -6,8 +6,13 @@ import Text from '../shared/Text'
 import Skeleton from '../shared/Skeleton'
 import Link from 'next/link'
 import ListRow from '../shared/ListRow'
+import useCredit from '../credit/hooks/useCredit'
 
 function CreditScore() {
+  const { data, isLoading } = useCredit()
+  if (isLoading) {
+    return <CreditScoreSkeleton />
+  }
   return (
     <div
       style={{
@@ -26,7 +31,11 @@ function CreditScore() {
             <Button>내 신용점수 보러가기</Button>
           </Link>
         </Flex>
-        <CreditScoreChart score={100} width={80} height={80} />
+        <CreditScoreChart
+          score={data?.creditScore ?? 0}
+          width={80}
+          height={80}
+        />
       </Flex>
     </div>
   )

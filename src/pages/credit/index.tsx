@@ -5,9 +5,15 @@ import Spacing from '@/components/shared/Spacing'
 import Text from '@/components/shared/Text'
 import { useAlertContext } from '@/contexts/AlertContext'
 import useUser from '@/hooks/useUser'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getSession } from 'next-auth/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useCallback } from 'react'
+import { QueryClient, dehydrate } from 'react-query'
+import { User } from '@models/user'
+import { getCredit } from '@/remote/credit'
+import useCredit from '@/components/credit/hooks/useCredit'
 
 const FixedBottomButton = dynamic(
   () => import('@/components/shared/FixedBottomButton'),
@@ -18,9 +24,10 @@ const FixedBottomButton = dynamic(
 
 function CreditPage() {
   const navigate = useRouter()
-  const 신용점수를조회했는가 = false
   const user = useUser()
   const { open } = useAlertContext()
+  const { data } = useCredit()
+
   const handleCheck = useCallback(() => {
     if (user == null) {
       open({
@@ -35,7 +42,7 @@ function CreditPage() {
     }
     navigate.push('/credit/check')
   }, [user, navigate, open])
-  return 신용점수를조회했는가 ? (
+  return data != null ? (
     <div>
       <Spacing size={40} />
       <Flex align="center" direction="column">
@@ -44,7 +51,7 @@ function CreditPage() {
         </Text>
         <Spacing size={10} />
         {/* 실제 점수를 가져와서 그려준다 */}
-        <CreditScoreChart score={0} />
+        <CreditScoreChart score={data.creditScore} />
       </Flex>
       <Spacing size={80} />
       <ul>
@@ -98,6 +105,26 @@ function CreditPage() {
       />
     </div>
   )
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context)
+  console.log(session)
+  if (session != null && session.user != null) {
+    const client = new QueryClient()
+    await client.prefetchQuery(['credit', (session.user as User).id], () =>
+      getCredit((session.user as User).id),
+    )
+    return {
+      props: {
+        dehydratedState: JSON.parse(JSON.stringify(dehydrate(client))),
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
 export default CreditPage

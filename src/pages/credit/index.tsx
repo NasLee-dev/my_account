@@ -109,7 +109,6 @@ function CreditPage() {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context)
-  console.log(session)
   if (session != null && session.user != null) {
     const client = new QueryClient()
     await client.prefetchQuery(['credit', (session.user as User).id], () =>

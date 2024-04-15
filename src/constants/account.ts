@@ -1,4 +1,4 @@
-import { Term } from '@models/account'
+import { AccountForm, Term } from '@models/account'
 
 export const 약관목록 = [
   {
@@ -46,4 +46,4 @@ export const FORMS = [
     required: true,
     type: 'TEXT_FIELD',
   },
-]
+] as AccountForm[]

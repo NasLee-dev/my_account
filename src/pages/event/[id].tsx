@@ -17,7 +17,6 @@ function EventPage({ initialEvnent, id }: EventPageProps) {
     initialData: initialEvnent,
     onSuccess: (event) => {
       const 이벤트가종료되었는가 = isAfter(new Date(), parseISO(event.endDate))
-      console.log(event)
       if (이벤트가종료되었는가) {
         open({
           title: `${event.title} 이벤트가 종료되었습니다`,
@@ -36,7 +35,6 @@ function EventPage({ initialEvnent, id }: EventPageProps) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.query
   const event = await getEvent(id as string)
-  console.log(event)
   return {
     props: {
       id,

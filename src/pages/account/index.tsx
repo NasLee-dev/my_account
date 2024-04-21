@@ -1,3 +1,4 @@
+import Spacing from '@/components/shared/Spacing'
 import withAuth from '@/hooks/withAuth'
 import dynamic from 'next/dynamic'
 
@@ -11,7 +12,21 @@ function AccountPage() {
   return (
     <div>
       <MonthlyChart chartData={generateMonthlyChartData()} />
+      <Spacing
+        size={8}
+        backgroundColor="gray100"
+        style={{
+          margin: '20px 0',
+        }}
+      />
       <CategoryPieChart chartData={generatePieChartData()} />
+      <Spacing
+        size={8}
+        backgroundColor="gray100"
+        style={{
+          margin: '20px 0',
+        }}
+      />
       <Transactions />
     </div>
   )

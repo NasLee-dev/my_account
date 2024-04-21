@@ -3,14 +3,25 @@ import dynamic from 'next/dynamic'
 
 const Transactions = dynamic(() => import('@/components/account/Transactions'))
 const MonthlyChart = dynamic(() => import('@/components/account/MonthlyChart'))
+const CategoryPieChart = dynamic(
+  () => import('@/components/account/CategoryPieChart'),
+)
 
 function AccountPage() {
   return (
     <div>
       <MonthlyChart chartData={generateMonthlyChartData()} />
+      <CategoryPieChart chartData={generatePieChartData()} />
       <Transactions />
     </div>
   )
+}
+
+function generatePieChartData() {
+  return ['카페', '쇼핑', '여행', '커피'].map((label) => ({
+    label,
+    amount: Math.floor(Math.random() * (100000 - 10000 + 1)) + 10000,
+  }))
 }
 
 function generateMonthlyChartData() {

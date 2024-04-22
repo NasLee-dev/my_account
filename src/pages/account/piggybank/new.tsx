@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { PiggyBank } from '@/models/piggybank'
 import useUser from '@/hooks/useUser'
 import { useMutation } from 'react-query'
-import createPiggybank from '@/remote/piggyBank'
+import { createPiggybank } from '@/remote/piggyBank'
 import { useAlertContext } from '@/contexts/AlertContext'
 
 const FixedBottomButton = dynamic(

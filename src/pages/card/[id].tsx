@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Flex from '@/components/shared/Flex'
 import Text from '@/components/shared/Text'
 import dynamic from 'next/dynamic'
+import SEO from '@/components/shared/SEO'
 
 const FixedBottomButton = dynamic(
   () => import('@/components/shared/FixedBottomButton'),
@@ -35,6 +36,11 @@ function CardDetailPage({ initialCard }: CardDetailPageProps) {
     promotion != null ? removeHtmlTags(promotion.title) : tags.join(', ')
   return (
     <div>
+      <SEO
+        title={`${corpName} ${name}`}
+        description={subTitle}
+        image="https://img.sbs.co.kr/newsnet/etv/upload/2023/12/11/30000894114_500.jpg"
+      />
       <Top title={`${corpName} ${name}`} subTitle={subTitle} />
       <ul>
         {benefit.map((text, index) => (

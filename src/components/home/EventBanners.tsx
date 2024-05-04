@@ -9,6 +9,7 @@ import Text from '@shared/Text'
 import Skeleton from '@shared/Skeleton'
 
 import useEventBanners from './hooks/useEventBanners'
+import ErrorBoundary from '../shared/ErrorBoundary'
 
 function EventBanners() {
   const { data } = useEventBanners()
@@ -46,6 +47,14 @@ function EventBanners() {
   )
 }
 
+function WrapErrorBoundary() {
+  return (
+    <ErrorBoundary fallbackComponent={<div>이벤트 배너에 문제가 생겻어요</div>}>
+      <EventBanners />
+    </ErrorBoundary>
+  )
+}
+
 const bannerStyles = css`
   padding: 24px;
   border-radius: 8px;
@@ -63,6 +72,6 @@ export function BannerSkeleton() {
   )
 }
 
-export default withSusepnse(EventBanners, {
+export default withSusepnse(WrapErrorBoundary, {
   fallback: <BannerSkeleton />,
 })

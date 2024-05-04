@@ -8,6 +8,7 @@ import Layout from '@shared/Layout'
 import AuthGuard from '@/components/auth/AuthGuard'
 import Navbar from '@/components/shared/Navbar'
 import { AlertContextProvider } from '@/contexts/AlertContext'
+import ErrorBoundary from '@/components/shared/ErrorBoundary'
 
 const client = new QueryClient({})
 
@@ -21,12 +22,12 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={client}>
           <Hydrate state={dehydratedState}>
-            <AlertContextProvider>
-              <AuthGuard>
+            <ErrorBoundary>
+              <AlertContextProvider>
                 <Navbar />
                 <Component {...pageProps} />
-              </AuthGuard>
-            </AlertContextProvider>
+              </AlertContextProvider>
+            </ErrorBoundary>
           </Hydrate>
         </QueryClientProvider>
       </SessionProvider>
